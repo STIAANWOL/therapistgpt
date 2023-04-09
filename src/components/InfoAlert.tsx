@@ -12,8 +12,8 @@ export default function InfoAlert({ setShowAlert }: InfoAlertProps) {
       <div className="flex sm:flex-row flex-col">
         <InfoSVG />
         <span>
-          If you're experiencing serious mental health issues, please seek the
-          help of a licensed mental health professional. This app is not
+          If you&apos;re experiencing serious mental health issues, please seek
+          the help of a licensed mental health professional. This app is not
           intended to replace medical advice or treatment.
         </span>
       </div>
