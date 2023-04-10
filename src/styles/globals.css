@@ -19,7 +19,6 @@
   display: inline-block;
   width: 1ch;
   animation: flicker 0.5s infinite;
-  vertical-align: middle;
   margin-bottom: 4px;
 }
 
