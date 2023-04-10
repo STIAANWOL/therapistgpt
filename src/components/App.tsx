@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import InputControl from "./InputControl";
 import { openai } from "@/utils/chatgpt";
 import ChatContainer from "./ChatContainer";
@@ -6,8 +6,9 @@ import {
   ChatCompletionRequestMessage,
   ChatCompletionResponseMessage,
 } from "openai";
-import InfoAlert from "./InfoAlert";
 import Banner from "./Banner";
+import WarningAlert from "./WarningAlert";
+import ErrorAlert from "./ErrorAlert";
 
 const systemPrompt: ChatCompletionRequestMessage = {
   role: "system",
@@ -21,34 +22,41 @@ export default function App() {
   const [responseAdded, setResponseAdded] = useState(false);
   const [promptAdded, setPromptAdded] = useState(false);
   const [loadingResponse, setLoadingResponse] = useState(false);
-  const [showAlert, setShowAlert] = useState(true);
+  const [showWarning, setShowWarning] = useState(true);
+  const [showError, setShowError] = useState(false);
   const [chatHistory, setChatHistory] = useState<
     ChatCompletionRequestMessage[]
   >([systemPrompt]);
 
-  const handleResponse = async () => {
-    setLoadingResponse(true);
-    const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: chatHistory,
-      temperature: 1,
-      max_tokens: 200,
-    });
+  const handleResponse = useCallback(async () => {
+    try {
+      setLoadingResponse(true);
+      const completion = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: chatHistory,
+        temperature: 1,
+        max_tokens: 200,
+      });
 
-    const chatGptResponse = completion.data.choices[0].message?.content;
+      const chatGptResponse = completion.data.choices[0].message?.content;
 
-    setResponse(chatGptResponse || "Error!");
+      setResponse(chatGptResponse || "Error!");
 
-    setResponseAdded(true);
-    setPromptAdded(false);
-    setLoadingResponse(false);
-  };
+      setResponseAdded(true);
+      setPromptAdded(false);
+      setLoadingResponse(false);
+      setShowError(false);
+    } catch (error) {
+      setShowError(true);
+      setLoadingResponse(false);
+    }
+  }, [chatHistory]);
 
   useEffect(() => {
     if (chatHistory?.length && promptAdded) {
       handleResponse();
     }
-  }, [chatHistory]);
+  }, [chatHistory, handleResponse]);
 
   useEffect(() => {
     if (response && responseAdded) {
@@ -79,13 +87,14 @@ export default function App() {
       <div className="grow overflow-y-auto">
         <ChatContainer chatHistory={chatHistory} />
       </div>
+      {showError && <ErrorAlert setShowError={setShowError} />}
       <InputControl
         setPrompt={setPrompt}
         prompt={prompt}
         getResponse={getResponse}
         loadingResponse={loadingResponse}
       />
-      {showAlert && <InfoAlert setShowAlert={setShowAlert} />}
+      {showWarning && <WarningAlert setShowWarning={setShowWarning} />}
     </main>
   );
 }

@@ -2,13 +2,13 @@ import { Dispatch, SetStateAction, useState } from "react";
 import InfoSVG from "./icons/InfoSVG";
 import CloseSVG from "./icons/CloseSVG";
 
-interface InfoAlertProps {
-  setShowAlert: Dispatch<SetStateAction<boolean>>;
+interface WarningAlertProps {
+  setShowWarning: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function InfoAlert({ setShowAlert }: InfoAlertProps) {
+export default function WarningAlert({ setShowWarning }: WarningAlertProps) {
   return (
-    <div className="alert alert-info shadow-lg">
+    <div className="alert alert-warning shadow-lg">
       <div className="flex sm:flex-row flex-col">
         <InfoSVG />
         <span>
@@ -18,7 +18,7 @@ export default function InfoAlert({ setShowAlert }: InfoAlertProps) {
         </span>
       </div>
       <button
-        onClick={() => setShowAlert(false)}
+        onClick={() => setShowWarning(false)}
         className="btn btn-ghost btn-xs alertButton"
       >
         <CloseSVG />
