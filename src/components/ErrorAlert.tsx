@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import InfoSVG from "./icons/InfoSVG";
 import CloseSVG from "./icons/CloseSVG";
+import ErrorSVG from "./icons/ErrorSVG";
 
 interface ErrorAlertProps {
   setShowError: Dispatch<SetStateAction<boolean>>;
@@ -8,9 +8,9 @@ interface ErrorAlertProps {
 
 export default function ErrorAlert({ setShowError }: ErrorAlertProps) {
   return (
-    <div className="alert alert-error shadow-lg">
-      <div className="flex sm:flex-row flex-col">
-        <InfoSVG />
+    <div className="flex flex-row alert alert-error shadow-lg">
+      <div>
+        <ErrorSVG />
         <span>Unable to process request. Please try again later.</span>
       </div>
       <button

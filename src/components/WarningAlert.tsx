@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import InfoSVG from "./icons/InfoSVG";
 import CloseSVG from "./icons/CloseSVG";
+import WarningSVG from "./icons/WarningSVG";
 
 interface WarningAlertProps {
   setShowWarning: Dispatch<SetStateAction<boolean>>;
@@ -9,8 +9,8 @@ interface WarningAlertProps {
 export default function WarningAlert({ setShowWarning }: WarningAlertProps) {
   return (
     <div className="alert alert-warning shadow-lg">
-      <div className="flex sm:flex-row flex-col">
-        <InfoSVG />
+      <div>
+        <WarningSVG />
         <span>
           If you&apos;re experiencing serious mental health issues, please seek
           the help of a licensed mental health professional. This app is not
