@@ -1,3 +1,6 @@
-Add a env.local in root of project and add variable NEXT_PUBLIC_OPENAI_API_KEY with your OpenAI API key.
+TherapistGPT is an example app of the OpenAI API with a prompt wrapper around it.
 
-npm run dev to run project.
+Setup:
+
+1. Add env.local file in root of project and add OPENAI_API_KEY=your_api_key
+2. npm run dev
