@@ -32,9 +32,13 @@ export default function App() {
     try {
       setLoadingResponse(true);
 
-      const response = await fetch(
-        "/api/chatgpt?chatHistory=" + JSON.stringify(chatHistory)
-      );
+      const response = await fetch("/api/chatgpt", {
+        method: "POST",
+        body: JSON.stringify(JSON.stringify(chatHistory)),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const responseBody = await response.json();
 

@@ -6,13 +6,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const chatHistory = req.query.chatHistory;
-
-  const chatHistoryArray = JSON.parse(chatHistory as string);
+  const chatHistory = JSON.parse(req.body);
 
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    messages: chatHistoryArray,
+    messages: chatHistory,
     temperature: 1,
     max_tokens: 200,
   });
