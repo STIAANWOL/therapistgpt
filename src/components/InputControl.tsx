@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import UpRightSVG from "./icons/UpRightSVG";
 
 interface InputControlProps {
@@ -33,7 +33,7 @@ export default function InputControl({
       <button
         type="submit"
         disabled={!prompt || loadingResponse}
-        className={`btn btn btn-ghost ${loadingResponse && "loading"}`}
+        className={`btn btn-ghost ${loadingResponse && "loading"}`}
       >
         {!loadingResponse && <UpRightSVG />}
       </button>

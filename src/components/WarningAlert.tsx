@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import InfoSVG from "./icons/InfoSVG";
 import CloseSVG from "./icons/CloseSVG";
 
