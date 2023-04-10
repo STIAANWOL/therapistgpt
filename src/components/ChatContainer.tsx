@@ -40,13 +40,15 @@ export default function ChatContainer({ chatHistory }: ChatContainerProps) {
         <div key={messageIndex}>
           {message?.role === "user" && (
             <div className="chat chat-end">
-              <span className="chat-bubble">{message?.content}</span>
+              <span className="chat-bubble whitespace-pre-line">
+                {message?.content}
+              </span>
             </div>
           )}
           {messageIndex === chatHistory.length - 1 &&
             message?.role === "assistant" && (
               <div className="chat chat-start">
-                <span className="chat-bubble">
+                <span className="chat-bubble whitespace-pre-line">
                   {displayResponse}
                   {!completedTyping && <CursorSVG />}
                 </span>
@@ -55,7 +57,9 @@ export default function ChatContainer({ chatHistory }: ChatContainerProps) {
           {message?.role === "assistant" &&
             messageIndex !== chatHistory.length - 1 && (
               <div className="chat chat-start">
-                <span className="chat-bubble">{message?.content}</span>
+                <span className="chat-bubble whitespace-pre-line">
+                  {message?.content}
+                </span>
               </div>
             )}
         </div>

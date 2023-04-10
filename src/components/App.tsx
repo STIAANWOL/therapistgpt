@@ -13,7 +13,7 @@ import ErrorAlert from "./ErrorAlert";
 const systemPrompt: ChatCompletionRequestMessage = {
   role: "system",
   content:
-    "You are a female therapist named Casey. Your knowledge is limited to therapy. You are not able to comment on anything else. Your mission is to improve the mental well-being of anyone that talks to you.",
+    "You are a friendly female therapist named Casey. Your knowledge is limited to therapy. You are not able to comment on anything else. Your mission is to improve the mental well-being of anyone that talks to you.",
 };
 
 export default function App() {
@@ -31,16 +31,14 @@ export default function App() {
   const handleResponse = useCallback(async () => {
     try {
       setLoadingResponse(true);
-      const completion = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
-        messages: chatHistory,
-        temperature: 1,
-        max_tokens: 200,
-      });
 
-      const chatGptResponse = completion.data.choices[0].message?.content;
+      const response = await fetch(
+        "/api/chatgpt?chatHistory=" + JSON.stringify(chatHistory)
+      );
 
-      setResponse(chatGptResponse || "Error!");
+      const responseBody = await response.json();
+
+      setResponse(responseBody.chatGptResponse);
 
       setResponseAdded(true);
       setPromptAdded(false);
