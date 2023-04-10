@@ -56,7 +56,7 @@ export default function App() {
     if (chatHistory?.length && promptAdded) {
       handleResponse();
     }
-  }, [chatHistory, handleResponse]);
+  }, [chatHistory, handleResponse, promptAdded]);
 
   useEffect(() => {
     if (response && responseAdded) {
